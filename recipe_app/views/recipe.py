@@ -159,7 +159,7 @@ class RecipeViewSet(ViewSet):
 
     def destroy(self, request, pk=None):
         """
-        Delete an Recipe.
+        Delete a Recipe.
         If unsuccessful, a response payload with:
             - status code: 404
             - error: recipe_not_found
@@ -183,3 +183,41 @@ class RecipeViewSet(ViewSet):
             'message': 'recipe deleted successfully'
             }
         return Response(data, status=status.HTTP_200_OK)
+
+
+    def partial_update(self, request, pk=None):
+        """
+        Update an recipe.
+        If successful, response payload with:
+            - status code: 200
+            - data
+        The response payload has keys:
+            - name
+            - user
+            - ingredient
+            - step
+            - status code: 200
+        If unsuccessful, a response payload with:
+            - status
+            - error
+        Request
+        -------
+        method: patch
+        url: /api/v1/recipe/<id>
+        """
+        recipe = resource_exists(Recipe, 'pk', pk)
+        if not recipe:
+            response_attr = {'error_key': 'not_found', 'format_str': 'Recipe'}
+            data = get_response(**response_attr)
+            return Response(data, status.HTTP_404_NOT_FOUND)
+        serializer = RecipeSerializer(recipe, context={'request': request}, data=request.data, partial=True)
+        if serializer.is_valid():
+            data = save_serializer(serializer)
+            return Response(data, status=status.HTTP_201_CREATED)
+        data = {
+            'status': 'error'
+        }
+
+        data.update({'data': serializer.errors})
+        status_code = status.HTTP_400_BAD_REQUEST
+        return Response(data, status=status_code)

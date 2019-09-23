@@ -71,6 +71,7 @@ class RecipeTest(BaseTestCase):
         data = response.data
         self.assertEqual(response.status_code, 200)
 
+
     def test_delete_recipe(self):
         """Test delete single recipe in the database."""
         response = self.client.delete(
