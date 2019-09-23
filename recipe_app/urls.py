@@ -20,6 +20,7 @@ urlpatterns = [
     path('recipe/user/<uuid:userId>/', RecipeViewSet.as_view({'get': 'retrieve'}), name='user_recipe'),
     path('recipe/<uuid:pk>/', RecipeViewSet.as_view({
          'get': 'get_recipe',
+         'patch': 'partial_update',
          'delete': 'destroy' 
          }), name='get_recipe')
 ]
