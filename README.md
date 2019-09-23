@@ -2,7 +2,6 @@
 
 #### A recipe application that helps to track the steps and ingredients in making a particular recipe
 
-[![Build Status](https://travis-ci.org/el-Joft/Recipe-app.svg?branch=develop)](https://travis-ci.org/el-Joft/Recipe-app)
 
 ### Technologies used
 - Pyhton django
