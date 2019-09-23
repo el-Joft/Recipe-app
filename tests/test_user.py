@@ -4,7 +4,7 @@ from tests.base import BaseTestCase
 class UserAccount(BaseTestCase):
 
     def test_creating_user(self):
-        """Test post activities in the database."""
+        """Test post user in the database."""
         self.user_data['email'] = 'newemail@gmail.com'
         self.user_data['username'] = 'user001'
         response = self.client.post(

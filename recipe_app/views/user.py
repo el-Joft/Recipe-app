@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from recipe_app.models.app import User
 from django.shortcuts import render
 from recipe_app.serializers import UsersSerializer
 from rest_framework import status
